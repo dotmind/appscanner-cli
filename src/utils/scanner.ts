@@ -3,7 +3,7 @@ import { execSync } from "child_process";
 import { APP_ROOT_DIRECTORY_PATH } from "../../index";
 import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from "./spinner";
 
-import frameworks from '../config/frameworks.json';
+import frameworks from '../config/frameworks';
 import { checkExists } from "./filesystem";
 
 const decodeApk = async (apkID: string, apkPath: string) => {
@@ -53,10 +53,13 @@ const checkArchDirs = (name: string, apkDecodedPath: string, typicalDirs?: strin
   if (!typicalDirs) {
     throw `Cannot found typical files for ${name} framework`
   }
-  const exists = checkExists(`${apkDecodedPath}/${typicalDirs[0]}`)
+  const exists = typicalDirs.map((dir) => {
+    return checkExists(`${apkDecodedPath}/${dir}`)
+  })
+  
   return {
     framework: name,
-    percent: exists ? '100' : '0',
+    percent: exists.includes(true) ? '100' : '0',
   }
 }
 
@@ -64,10 +67,12 @@ const checkArchFiles = (name: string, apkDecodedPath: string, typicalFiles?: str
   if (!typicalFiles) {
     throw `Cannot found typical files for ${name} framework`
   }
-  const exists = checkExists(`${apkDecodedPath}/${typicalFiles[0]}`)
+  const exists = typicalFiles.map((file) => {
+    return checkExists(`${apkDecodedPath}/${file}`)
+  })
   return {
     framework: name,
-    percent: exists ? '100' : '0',
+    percent: exists.includes(true) ? '100' : '0',
   }
 }
 
@@ -82,8 +87,10 @@ const scanApp = async (apkID: string, apkDecodedPath: string) => {
         result = checkArchFiles(name, apkDecodedPath, typicalFiles);
       } else if (typicalDirs) {
         result = checkArchDirs(name, apkDecodedPath, typicalDirs);
-      } else {
+      } else if (regex) {
         result = countOccurence(name, regex, apkDecodedPath, occurenceAverage);
+      } else {
+        throw 'No scanning method found for this framework';
       }
       results.push(result)
     })
