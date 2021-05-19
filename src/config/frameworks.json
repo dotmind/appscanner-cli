@@ -16,7 +16,9 @@
   {
     "name": "Xamarin",
     "regex": "xamarin",
-    "occurenceAverage": 50
+    "typicalDirs": [
+      "smali/com/xamarin"
+    ]
   },
   {
     "name": "Ionic",
