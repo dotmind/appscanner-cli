@@ -4,9 +4,16 @@
 
 Find out what the mobile application was developed with.
 
+## How it works (steps)
+
+1. Download APK with [gplaydl](https://github.com/rehmatworks/gplaydl)
+2. Decode APK with [Apktool](https://ibotpeaches.github.io/Apktool/documentation/)
+3. Scan decoded APK to find out what framework is used
+
 ## 🚀 Roadmap
 
 - [x] Android APK scan
+- [x] Bulk scan from a .txt file
 - [ ] Flutter typical architecture scan
 - [ ] Xamarin typical architecture scan
 - [ ] Ionic typical architecture scan
@@ -15,9 +22,9 @@ Find out what the mobile application was developed with.
 
 ## 👨🏼‍💻 Installation
 
-1. Install firstly [gplaydl](https://github.com/rehmatworks/gplaydl)
+1. Install firstly [gplaydl](https://github.com/rehmatworks/gplaydl) and login with your Play Store account
 2. Install [Apktool](https://ibotpeaches.github.io/Apktool/documentation/)
-3. Install node_mudles with `yarn`
+3. Install node_modules with `yarn`
 
 ## 🏄🏼‍♂️ Run
 
