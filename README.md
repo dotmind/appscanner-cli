@@ -14,7 +14,7 @@ Find out what the mobile application was developed with.
 
 - [x] Android APK scan
 - [x] Bulk scan from a .txt file
-- [ ] Flutter typical architecture scan
+- [x] Flutter typical architecture scan
 - [ ] Xamarin typical architecture scan
 - [ ] Ionic typical architecture scan
 - [ ] iOS App scan

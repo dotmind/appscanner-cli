@@ -2,7 +2,6 @@
   {
     "name": "React Native",
     "regex": "reactnative\\|react_native\\|react-native",
-    "occurenceAverage": 5,
     "typicalFiles": [
       "assets/index.android.bundle"
     ]
@@ -10,7 +9,9 @@
   {
     "name": "Flutter",
     "regex": "flutter",
-    "occurenceAverage": 9000
+    "typicalDirs": [
+      "smali/io/flutter"
+    ]
   },
   {
     "name": "Xamarin",

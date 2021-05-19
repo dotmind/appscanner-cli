@@ -96,17 +96,16 @@ const getFileNameWithoutExt = (filePath: string): string => {
 };
 
 /**
- * Check file exists
- * @param {string} filePath File path to check if exists
- * @returns {Boolean} File exists or not
+ * Check if file or directory exists
+ * @param {string} path File of Directory path to check if exists
+ * @returns {Boolean} File of Directory exists or not
  */
-const checkFile = (filePath: string): boolean => {
+const checkExists = (path: string): boolean => {
   try {
-    return fs.existsSync(filePath);
+    return fs.existsSync(path);
   } catch (error) {
     throw new Error(error);
   }
 };
 
-
-export { readFile, writeFile, appendFile, listFiles, mkdir, getFileNameWithoutExt, checkFile };
+export { readFile, writeFile, appendFile, listFiles, mkdir, getFileNameWithoutExt, checkExists };
