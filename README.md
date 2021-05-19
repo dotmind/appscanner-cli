@@ -1,14 +1,25 @@
+<img src="https://www.maximelb.com/wp-content/uploads/2019/12/1-mUjeG4M7A7kCyisHLsC2Yw.jpeg" width="100%" />
+
 # App Scanner
 
-Search which mobile app framework company using.
+Find out what the mobile application was developed with.
 
-## Installation
+## 🚀 Roadmap
+
+- [x] Android APK scan
+- [ ] Flutter typical architecture scan
+- [ ] Xamarin typical architecture scan
+- [ ] Ionic typical architecture scan
+- [ ] iOS App scan
+- [ ] Build an intuitive web app
+
+## 👨🏼‍💻 Installation
 
 1. Install firstly [gplaydl](https://github.com/rehmatworks/gplaydl)
 2. Install [Apktool](https://ibotpeaches.github.io/Apktool/documentation/)
 3. Install node_mudles with `yarn`
 
-## Run
+## 🏄🏼‍♂️ Run
 
 `yarn start --apkID com.facebook.katana`
 
@@ -20,7 +31,7 @@ or to bulk scan
 
 `yarn start --scanListFile ./.scan/apkIDs.txt`
 
-## How to detect Framework
+## 🕵🏼 How to detect Frameworks
 
 ### By detecting typical architecture files (100% reliable)
 
