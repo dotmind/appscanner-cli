@@ -1,10 +1,10 @@
 <img src="https://www.maximelb.com/wp-content/uploads/2019/12/1-mUjeG4M7A7kCyisHLsC2Yw.jpeg" width="100%" />
 
-# App Scanner
+# App Scanner CLI
 
 Find out what the mobile application was developed with.
 
-- [App Scanner](#app-scanner)
+- [App Scanner CLI](#app-scanner-cli)
   - [How it works (steps)](#how-it-works-steps)
   - [🚀 Roadmap](#-roadmap)
     - [🔨 Frameworks compatibilities](#-frameworks-compatibilities)
