@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import { Arguments } from "yargs";
-import { bulkScan, simpleScan } from "./scanner";
+
+import { bulkScan, simpleScan } from "@utils/scanner";
 
 export type ArgvType = Arguments<{
   scanListFile?: string;

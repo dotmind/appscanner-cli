@@ -1,6 +1,8 @@
 import { execSync } from 'child_process';
-import { APP_ROOT_DIRECTORY_PATH } from '../../index';
-import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from './spinner';
+
+import { APP_ROOT_DIRECTORY_PATH } from '@app';
+
+import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from '@utils/spinner';
 
 const downloadApk = async (apkID: string) => {
   // Init CLI spinner

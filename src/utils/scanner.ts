@@ -1,15 +1,13 @@
 import { execSync } from "child_process";
-import inquirer from 'inquirer';
 
-import { APP_ROOT_DIRECTORY_PATH } from "../../index";
-import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from "./spinner";
+import { APP_ROOT_DIRECTORY_PATH } from '@app';
 
-import { downloadApk } from "../utils/downloader";
-import { readFile, appendFile } from '../utils/filesystem';
+import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from "@utils/spinner";
+import { downloadApk } from "@utils/downloader";
+import { readFile, appendFile, checkExists } from '@utils/filesystem';
+import { inquirerBulkScan, inquirerSimpleScan } from "@utils/inquirer";
 
-import frameworks from '../config/frameworks';
-import { checkExists } from "./filesystem";
-import { inquirerBulkScan, inquirerSimpleScan } from "./inquirer";
+import frameworks from '@config/frameworks';
 
 const decodeApk = async (apkID: string, apkPath: string) => {
   // Init CLI spinner
