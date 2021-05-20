@@ -12,6 +12,7 @@ Find out what the mobile application was developed with.
   - [👨🏼‍💻 Installation](#-installation)
     - [Auto install](#auto-install)
     - [Manual install](#manual-install)
+  - [Preview](#preview)
   - [🏄🏼‍♂️ Run](#️-run)
     - [CLI Arguments](#cli-arguments)
   - [🕵🏼 How to detect Frameworks](#-how-to-detect-frameworks)
@@ -58,6 +59,11 @@ If you're on MacOS you can run this command `yarn run install:macos`
 1. Install firstly [gplaydl](https://github.com/rehmatworks/gplaydl) and login with your Play Store account
 2. Install [Apktool](https://ibotpeaches.github.io/Apktool/documentation/)
 3. Install node_modules with `yarn`
+
+
+## Preview
+
+<img src="./preview/start.gif" width="70%" alt="yarn start preview app scanner" />
 
 ## 🏄🏼‍♂️ Run
 
