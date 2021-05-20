@@ -1,10 +1,15 @@
 import { execSync } from "child_process";
+import inquirer from 'inquirer';
 
 import { APP_ROOT_DIRECTORY_PATH } from "../../index";
 import { initSpinner, SpinnerStatusEnum, updateSpinnerStatus } from "./spinner";
 
+import { downloadApk } from "../utils/downloader";
+import { readFile, appendFile } from '../utils/filesystem';
+
 import frameworks from '../config/frameworks';
 import { checkExists } from "./filesystem";
+import { inquirerBulkScan, inquirerSimpleScan } from "./inquirer";
 
 const decodeApk = async (apkID: string, apkPath: string) => {
   // Init CLI spinner
@@ -76,7 +81,7 @@ const checkArchFiles = (name: string, apkDecodedPath: string, typicalFiles?: str
   }
 }
 
-const scanApp = async (apkID: string, apkDecodedPath: string) => {
+const detectFramework = async (apkID: string, apkDecodedPath: string) => {
   // Init CLI spinner
   const spinner = initSpinner(`Starting to scan decoded APK with architecture method ${apkDecodedPath}`);
   try {
@@ -101,7 +106,7 @@ const scanApp = async (apkID: string, apkDecodedPath: string) => {
       SpinnerStatusEnum.SUCCESS,
       fullMessage
     );
-    return fullMessage;
+    return results;
   } catch (error) {
     updateSpinnerStatus(
       spinner,
@@ -111,7 +116,39 @@ const scanApp = async (apkID: string, apkDecodedPath: string) => {
   }
 }
 
+const bulkScan = async (scanListFilePath?: string) => {
+  const bulkInputFile = await inquirerBulkScan(scanListFilePath);
+  const outputScanResultsFilePath = `${APP_ROOT_DIRECTORY_PATH}/.scan/results.txt`;
+  const scanFileContent = await readFile(bulkInputFile, { encoding: 'utf-8'}) as string;
+  const apkIDs = scanFileContent.split('\n');
+  apkIDs.forEach(async (apkID) => {
+    const apkPath = await downloadApk(apkID);
+    if (!apkPath) {
+      throw `Couldn\'t download ${apkID} APK`;
+    }
+    const decodedPath = await decodeApk(apkID, apkPath);
+    if (!decodedPath) {
+      throw `Couldn\'t decode ${apkID} APK`;
+    }
+    const results = await detectFramework(apkID, decodedPath);
+    await appendFile(outputScanResultsFilePath, `${results}\n`);
+  })
+}
+
+const simpleScan = async (argvApkID?: string) => {
+  const apkID = await inquirerSimpleScan(argvApkID);
+  const apkPath = await downloadApk(apkID);
+  if (!apkPath) {
+    process.exit();
+  }
+  const decodedPath = await decodeApk(apkID, apkPath);
+  if (!decodedPath) {
+    process.exit();
+  }
+  return await detectFramework(apkID, decodedPath);
+}
+
 export {
-  decodeApk,
-  scanApp,
+  simpleScan,
+  bulkScan,
 }

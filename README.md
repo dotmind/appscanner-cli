@@ -12,14 +12,26 @@ Find out what the mobile application was developed with.
 
 ## 🚀 Roadmap
 
+### Frameworks compatibilies
+
+> Try to update frameworks following [State of JS Mobile](https://2020.stateofjs.com/en-US/technologies/mobile-desktop/)
+
+- [x] [React Native](https://reactnative.dev/)
+- [x] [Flutter](https://flutter.dev/)
+- [x] [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
+- [x] [Cordova](https://cordova.apache.org/)
+- [x] [Capacitor](https://capacitorjs.com/)
+- [x] [Ionic](https://ionicframework.com/)
+
+### Scan features
+
 - [x] Android APK scan
-- [x] Bulk scan from a .txt file
-- [x] Flutter typical architecture scan
-- [x] Xamarin typical architecture scan
-- [x] Cordova typical architecture scan
-- [ ] Ionic typical architecture scan
 - [ ] iOS App scan
+- [x] Bulk Scan
 - [ ] Build an intuitive web app
+- [ ] Scan vulnerabilities
+  - [x] Scan sensitive data
+  - [ ] Scan security fails
 
 ## 👨🏼‍💻 Installation
 
