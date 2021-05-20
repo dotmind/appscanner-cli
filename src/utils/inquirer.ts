@@ -65,7 +65,6 @@ const inquirerSimpleScan = async (argvApkID?: string) => {
       }
     ]);
     apkID = apkIDprompted;
-    throw 'No APK ID detected'
   }
   return apkID;
 }
@@ -83,7 +82,6 @@ const inquirerBulkScan = async (argvBulkInputFile?: string) => {
       }
     ]);
     bulkInputFile = bulkFilePrompted;
-    throw 'No bulk input file found'
   }
   return bulkInputFile;
 }

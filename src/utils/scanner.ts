@@ -8,6 +8,7 @@ import { readFile, appendFile, checkExists } from '@utils/filesystem';
 import { inquirerBulkScan, inquirerSimpleScan } from "@utils/inquirer";
 
 import frameworks from '@config/frameworks';
+import chalk from "chalk";
 
 const decodeApk = async (apkID: string, apkPath: string) => {
   // Init CLI spinner
@@ -36,6 +37,7 @@ type ResultType = {
   percent: string;
   typicalFiles?: string[];
   typicalDirs?: string[];
+  buildedWith?: boolean;
 }
 
 const countOccurence = (name: string, regex: string, apkDecodedPath: string, occurenceAverage?: number): ResultType => {
@@ -49,6 +51,7 @@ const countOccurence = (name: string, regex: string, apkDecodedPath: string, occ
     framework: name,
     occurences: Number(res),
     percent: percent > 100 ? '100' : percent.toFixed(0),
+    buildedWith: percent > 90,
   }
 }
 
@@ -63,6 +66,7 @@ const checkArchDirs = (name: string, apkDecodedPath: string, typicalDirs?: strin
   return {
     framework: name,
     percent: exists.includes(true) ? '100' : '0',
+    buildedWith: exists.includes(true),
   }
 }
 
@@ -76,6 +80,7 @@ const checkArchFiles = (name: string, apkDecodedPath: string, typicalFiles?: str
   return {
     framework: name,
     percent: exists.includes(true) ? '100' : '0',
+    buildedWith: exists.includes(true),
   }
 }
 
@@ -97,7 +102,9 @@ const detectFramework = async (apkID: string, apkDecodedPath: string) => {
       }
       results.push(result)
     })
-    const message = results.map(({ framework, percent }) => `${framework}: ${percent}%`).join(' | ');
+    const message = results.map(({ framework, percent, buildedWith }) => (
+      `${buildedWith ? chalk.green(framework) : framework}: ${percent}%`)
+    ).join(' | ');
     const fullMessage = `${apkID} --> ${message}`
     updateSpinnerStatus(
       spinner,
@@ -116,6 +123,9 @@ const detectFramework = async (apkID: string, apkDecodedPath: string) => {
 
 const bulkScan = async (scanListFilePath?: string) => {
   const bulkInputFile = await inquirerBulkScan(scanListFilePath);
+  if (!bulkInputFile) {
+    throw 'No bulk input file detected';
+  }
   const outputScanResultsFilePath = `${APP_ROOT_DIRECTORY_PATH}/.scan/results.txt`;
   const scanFileContent = await readFile(bulkInputFile, { encoding: 'utf-8'}) as string;
   const apkIDs = scanFileContent.split('\n');
@@ -135,6 +145,9 @@ const bulkScan = async (scanListFilePath?: string) => {
 
 const simpleScan = async (argvApkID?: string) => {
   const apkID = await inquirerSimpleScan(argvApkID);
+  if (!apkID) {
+    throw 'No APK ID detected';
+  }
   const apkPath = await downloadApk(apkID);
   if (!apkPath) {
     process.exit();

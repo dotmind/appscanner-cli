@@ -6,7 +6,9 @@ const frameworks: FrameworkType[] = [
     "typicalFiles": [
       "assets/index.android.bundle",
       "smali/com/facebook/react",
-      "smali_classes2/com/reactnative"
+      "smali_classes2/com/reactnative",
+      "assets/ReactMobileConfigMetadata.json",
+      "assets/react_native_routes.json"
     ]
   },
   {
