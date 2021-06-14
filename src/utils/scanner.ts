@@ -10,6 +10,15 @@ import { inquirerBulkScan, inquirerSimpleScan } from "@utils/inquirer";
 import frameworks from '@config/frameworks';
 import chalk from "chalk";
 
+type ResultType = {
+  framework: string;
+  occurences?: number;
+  percent: string;
+  typicalFiles?: string[];
+  typicalDirs?: string[];
+  buildedWith?: boolean;
+}
+
 const decodeApk = async (apkID: string, apkPath: string) => {
   // Init CLI spinner
   const spinner = initSpinner(`Starting to decompile APK ${apkPath}`);
@@ -29,15 +38,6 @@ const decodeApk = async (apkID: string, apkPath: string) => {
       `An error occured while decoding APK ${apkPath}`
     );
   }
-}
-
-type ResultType = {
-  framework: string;
-  occurences?: number;
-  percent: string;
-  typicalFiles?: string[];
-  typicalDirs?: string[];
-  buildedWith?: boolean;
 }
 
 const countOccurence = (name: string, regex: string, apkDecodedPath: string, occurenceAverage?: number): ResultType => {

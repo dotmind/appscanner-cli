@@ -77,7 +77,7 @@ const inquirerBulkScan = async (argvBulkInputFile?: string) => {
     } = await inquirer.prompt([
       {
         message: 'Enter Bulk Input File',
-        name: 'apkIDprompted',
+        name: 'bulkFilePrompted',
         type: 'input',
       }
     ]);
